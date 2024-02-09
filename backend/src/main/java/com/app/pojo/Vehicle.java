@@ -1,5 +1,9 @@
 package com.app.pojo;
 
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,18 +20,22 @@ private String model;
 @Column(length=10)
 private String color;
 @Column(length=20)
-private String inTime;
+private String vehicleType;
+@Column(length=20)
+private LocalDateTime inTime;
 public Vehicle() {
 	super();
+	this.inTime = LocalDateTime.now();
 }
-public Vehicle(String vehicleNo, String companyName, String model, String color, String inTime) {
-	super();
+public Vehicle(String vehicleNo, String companyName, String model, String color, String vehicleType) {
+	this();
 	this.vehicleNo = vehicleNo;
 	this.companyName = companyName;
 	this.model = model;
 	this.color = color;
-	this.inTime = inTime;
+	this.vehicleType = vehicleType;
 }
+
 public String getVehicleNo() {
 	return vehicleNo;
 }
@@ -52,17 +60,30 @@ public String getColor() {
 public void setColor(String color) {
 	this.color = color;
 }
-public String getInTime() {
+public LocalDateTime getInTime() {
 	return inTime;
 }
-public void setInTime(String inTime) {
+public void setInTime(LocalDateTime inTime) {
 	this.inTime = inTime;
 }
+
+
+public String getVehicleType() {
+	return vehicleType;
+}
+
+
+public void setVehicleType(String vehicleType) {
+	this.vehicleType = vehicleType;
+}
+
 @Override
 public String toString() {
 	return "Vehicle [vehicleNo=" + vehicleNo + ", companyName=" + companyName + ", model=" + model + ", color=" + color
-			+ ", inTime=" + inTime + "]";
+			+ ", vehicleType=" + vehicleType + ", inTime=" + inTime + "]";
 }
+
+
 
 
 }
