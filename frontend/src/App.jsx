@@ -14,7 +14,7 @@ function App() {
           <div className="w-[15rem] h-screen p-5">
             <Sidebar />
           </div>
-          <div className="py-7 px-14 bg-pallet-4 w-full">
+          <div className="pt-7 px-14 bg-pallet-4 w-full">
             <Routes>
               <Route index={true} path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchVehicle />} />

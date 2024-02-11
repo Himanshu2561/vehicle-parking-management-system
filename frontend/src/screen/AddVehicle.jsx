@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import VehicleRegForm from "../components/VehicleRegForm";
 
 const AddVehicle = () => {
   return (
-    <div>AddVehicle</div>
-  )
-}
+    <div className="flex justify-center items-center">
+      <VehicleRegForm />
+    </div>
+  );
+};
 
-export default AddVehicle
+export default AddVehicle;
