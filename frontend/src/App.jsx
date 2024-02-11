@@ -4,6 +4,7 @@ import HomePage from "./screen/HomePage";
 import SearchVehicle from "./screen/SearchVehicle";
 import AddVehicle from "./screen/AddVehicle";
 import { Routes, Route } from "react-router-dom";
+import LoginScreen from "./screen/LoginScreen";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route index={true} path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchVehicle />} />
               <Route path="/addvehicle" element={<AddVehicle />} />
+              <Route path="/login" element={<LoginScreen />} />
             </Routes>
           </div>
         </div>
