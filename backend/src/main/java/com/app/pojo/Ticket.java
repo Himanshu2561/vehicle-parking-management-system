@@ -25,8 +25,6 @@ public class Ticket {
     @Column(name = "vehicle_type", length = 255, nullable = false)
     private VehicleType type;  // type of the vehicle
 
-    @Column(name = "floor_number", length = 255, nullable = false)
-    private String floorNumber;  // floor number for the slot
 
     @OneToOne
     @JoinColumn(name = "vehicle_id", unique = true)
@@ -34,21 +32,21 @@ public class Ticket {
 
     public Ticket(){}
 
-    public Ticket(Date date, String vehicleNumber, int slotNumber, VehicleType type, String floorNumber) {
+    public Ticket(Date date, String vehicleNumber, int slotNumber, VehicleType type) {
         this.date = date;
         this.vehicleNumber = vehicleNumber;
         this.slotNumber = slotNumber;
         this.type = type;
-        this.floorNumber = floorNumber;
+
     }
 
-    public Ticket(int id, Date date, String vehicleNumber, int slotNumber, VehicleType type, String floorNumber) {
+    public Ticket(int id, Date date, String vehicleNumber, int slotNumber, VehicleType type) {
         this.id = id;
         this.date = date;
         this.vehicleNumber = vehicleNumber;
         this.slotNumber = slotNumber;
         this.type = type;
-        this.floorNumber = floorNumber;
+
     }
 
     public int getId() {
@@ -91,14 +89,6 @@ public class Ticket {
         this.type = type;
     }
 
-    public String getFloorNumber() {
-        return floorNumber;
-    }
-
-    public void setFloorNumber(String floorNumber) {
-        this.floorNumber = floorNumber;
-    }
-
     public Vehicle getVehicle() {
         return vehicle;
     }
@@ -115,7 +105,6 @@ public class Ticket {
                 ", vehicleNumber='" + vehicleNumber + '\'' +
                 ", slotNumber=" + slotNumber +
                 ", type=" + type +
-                ", floorNumber='" + floorNumber + '\'' +
                 '}';
     }
 }

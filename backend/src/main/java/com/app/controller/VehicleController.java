@@ -2,14 +2,13 @@ package com.app.controller;
 
 import java.util.List;
 
+import com.app.pojo.Ticket;
+import com.app.service.TicketService;
+import com.app.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.app.pojo.Vehicle;
 import com.app.service.IVehicleService;
@@ -30,10 +29,7 @@ public class VehicleController {
         this.ticketService = ticketService;
 	}
 
-	@Autowired
-	public IVehicleService vehicleService;
-
-	@GetMapping
+	/*@GetMapping
 	public List<Vehicle> getAllVehicles() {
 		return vehicleService.getAllVehicles();
 	}
@@ -43,7 +39,7 @@ public class VehicleController {
 	  { 
 		  System.out.println("in add New Vehicle"); 
 		  return vehicleService.addVehicle(obj); 
-	  }
+	  }*/
 
 
 

@@ -1,4 +1,5 @@
-import com.example.FinalCodeVehicle.entity.Vehicle;
+package com.app.service;
+import com.app.pojo.Vehicle;
 
 import java.util.List;
 

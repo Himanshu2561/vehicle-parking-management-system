@@ -1,8 +1,12 @@
-import com.example.FinalCodeVehicle.entity.Slots;
+package com.app.dao;
+
+import com.app.pojo.Slots;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository

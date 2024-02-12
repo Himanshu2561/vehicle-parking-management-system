@@ -1,14 +1,16 @@
-import com.example.FinalCodeVehicle.entity.Slots;
-import com.example.FinalCodeVehicle.entity.Ticket;
-import com.example.FinalCodeVehicle.entity.Vehicle;
-import com.example.FinalCodeVehicle.entity.VehicleType;
-import com.example.FinalCodeVehicle.repository.SlotRepository;
-import com.example.FinalCodeVehicle.repository.TicketRepository;
-import com.example.FinalCodeVehicle.repository.VehicleRepository;
-import jakarta.transaction.Transactional;
+package com.app.service;
+
+import com.app.dao.SlotRepository;
+import com.app.dao.TicketRepository;
+import com.app.dao.VehicleRepository;
+import com.app.pojo.Slots;
+import com.app.pojo.Ticket;
+import com.app.pojo.Vehicle;
+import com.app.pojo.VehicleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 
 @Service

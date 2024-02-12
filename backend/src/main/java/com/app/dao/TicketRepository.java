@@ -1,5 +1,9 @@
-import com.example.FinalCodeVehicle.entity.Vehicle;
-import org.springframework.data.jpa.repository.JpaRepository;
+package com.app.dao;
 
-public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
+import com.app.pojo.Ticket;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 }
