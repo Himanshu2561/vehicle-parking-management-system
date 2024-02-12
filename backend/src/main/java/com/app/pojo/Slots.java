@@ -1,5 +1,7 @@
 package com.app.pojo;
 
+import javax.persistence.*;
+
 @Entity
 @Table(name = "slots")
 public class Slots {
@@ -10,7 +12,6 @@ public class Slots {
     @Column(name = "slotNumber", nullable = false)
     private int slotNumber;  // setting the number of available slots for the two and four wheeler // user input
 
-
     @OneToOne
     @JoinColumn(name = "vehicle_id", unique = true)
     private Vehicle vehicle;
@@ -18,7 +19,6 @@ public class Slots {
     public Slots(){}
     public Slots(int slotsNumber) {  // setting the number of the slots
         this.slotNumber = slotsNumber;
-
     }
 
     public int getId() {
