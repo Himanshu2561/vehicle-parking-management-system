@@ -25,6 +25,9 @@ public class Vehicle {
 	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Ticket ticket;
 
+	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Slots slot;
+
 	public Vehicle(){}  // creating the no args constructor
 
 	public Vehicle(int id, String vehicleNumber, VehicleType vehicleType, Date ticketDate) {
@@ -45,6 +48,14 @@ public class Vehicle {
 		this.vehicleNumber = vehicleNumber;
 		this.vehicleType = vehicleType;
 	}
+
+	public Slots getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slots slot) {
+        this.slot = slot;
+    }
 
 	public Ticket getTicket() {
 		return ticket;

@@ -1,62 +1,62 @@
 package com.app.pojo;
 
+@Entity
+@Table(name = "slots")
 public class Slots {
-    private int slotsNumber;  // setting the number of available slots for the two and four wheeler // user input
-    private boolean isSlotEmpty;  // checking for the empty slots
-    private Vehicle parkVehicle;  // vehicle to be parked
-    private String floorNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    @Column(name = "slotNumber", nullable = false)
+    private int slotNumber;  // setting the number of available slots for the two and four wheeler // user input
+
+
+    @OneToOne
+    @JoinColumn(name = "vehicle_id", unique = true)
+    private Vehicle vehicle;
+
+    public Slots(){}
     public Slots(int slotsNumber) {  // setting the number of the slots
-        this.slotsNumber = slotsNumber;
-        isSlotEmpty = true;  // signifies the slot is empty
+        this.slotNumber = slotsNumber;
+
     }
 
-    public void setFloor(String floor){
-        this.floorNumber = floor;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSlotNumber() {
+        return slotNumber;
+    }
+
+    public void setSlotNumber(int slotNumber) {
+        this.slotNumber = slotNumber;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public int getSlotsNumber() {
-        return slotsNumber;
+        return slotNumber;
     }
 
     public void setSlotsNumber(int slotsNumber) {
-        this.slotsNumber = slotsNumber;
-    }
-
-    public boolean isSlotEmpty() {
-        return isSlotEmpty;
-    }
-
-    public void setSlotEmpty(boolean slotEmpty) {
-        isSlotEmpty = slotEmpty;
-    }
-
-    public Vehicle getParkVehicle() {
-        return parkVehicle;
-    }  // return the parked vehicle
-
-    public void setParkVehicle(Vehicle parkVehicle) {
-        this.parkVehicle = parkVehicle;
+        this.slotNumber = slotsNumber;
     }
 
     @Override
     public String toString() {
         return "Slots{" +
-                "slotsNumber=" + slotsNumber +
-                ", isSlotEmpty=" + isSlotEmpty +
-                ", parkVehicle=" + parkVehicle +
-                ", floorNumber=" + floorNumber +
+                "slotsNumber=" + slotNumber +
                 '}';
-    }
-
-    public void allocateSlot(Vehicle parkedVehicle){
-        this.parkVehicle = parkedVehicle;  // assigning the parked vehicle a value
-        this.isSlotEmpty = false;  // setting the slot as not empty
-    }
-
-    public void vacateSlots(){
-        this.parkVehicle = null;  // removing the vehicle from the parking
-        this.isSlotEmpty = true;  // freeing up the slot
-        this.floorNumber = "null";
     }
 }
