@@ -26,7 +26,7 @@ public class Ticket {
     private VehicleType type;  // type of the vehicle
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id", unique = true)
     private Vehicle vehicle;
 
@@ -97,6 +97,7 @@ public class Ticket {
         this.vehicle = vehicle;
     }
 
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -107,4 +108,5 @@ public class Ticket {
                 ", type=" + type +
                 '}';
     }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class TicketServiceImplementation implements TicketService{
@@ -41,6 +42,7 @@ public class TicketServiceImplementation implements TicketService{
         vehicleRepository.save(vehicle);  // saving the vehicle object in the database
 
 
+
         // Create a Slot entity and associate it with the vehicle
         Slots slot = new Slots();
         slot.setSlotNumber(slotNumber);
@@ -52,6 +54,12 @@ public class TicketServiceImplementation implements TicketService{
         ticketRepository.save(newTicket);
 
         return newTicket;
+    }
+
+    @Override
+    public Optional<Ticket> getById(Integer id) {
+
+        return ticketRepository.findById(id);
     }
 
     private Integer allocateSlot1(VehicleType vehicleType) {
@@ -80,7 +88,7 @@ public class TicketServiceImplementation implements TicketService{
         Ticket ticket = new Ticket();
         ticket.setDate(new Date());
         ticket.setVehicleNumber(vehicle.getVehicleNumber());
-        //ticket.setVehicle(vehicle);
+        ticket.setVehicle(vehicle);
         ticket.setSlotNumber(slot.getSlotsNumber());
         ticket.setType(vehicle.getVehicleType());
 

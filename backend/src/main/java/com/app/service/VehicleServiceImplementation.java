@@ -35,11 +35,9 @@ public class VehicleServiceImplementation implements VehicleService{
 
     @Transactional
     @Override
-    public void removeVehicleByTicketId(Integer ticketId) {
-        Ticket ticket = ticketRepository.findById(ticketId)
-                .orElseThrow(() -> new RuntimeException("Ticket not found with id: " + ticketId));
-
-        Vehicle vehicle = ticket.getVehicle();
+    public void removeVehicleById(int id) {
+      vehicleRepository.deleteAllById(id);
+       /* Vehicle vehicle = ticket.getVehicle();
         Slots slot = slotRepository.findByVehicleId(vehicle.getId());
 
         // Delete the associated slot and ticket
@@ -48,6 +46,6 @@ public class VehicleServiceImplementation implements VehicleService{
         }
         ticketRepository.delete(ticket);
         // delete the associated vehicle
-        vehicleRepository.delete(vehicle);
+        vehicleRepository.delete(vehicle);*/
     }
 }
