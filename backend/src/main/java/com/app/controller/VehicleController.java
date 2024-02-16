@@ -1,7 +1,11 @@
 package com.app.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
+import com.app.dao.VehicleRepository;
 import com.app.pojo.Ticket;
 import com.app.service.TicketService;
 import com.app.service.VehicleService;
@@ -16,6 +20,9 @@ import com.app.service.IVehicleService;
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
+	
+	@Autowired
+    private VehicleRepository vehicleRepository;
 
 	// getting the instances of the service layers
 	private VehicleService vehicleService;
@@ -76,4 +83,21 @@ public class VehicleController {
 	 * { System.out.println("in add New Vehicle"); return new ResponseEntity<>(
 	 * vehicleService.addVehicle(obj),HttpStatus.CREATED); }
 	 */
+	  @GetMapping("/yesterday-entries")
+	    public List<Vehicle> getYesterdayEntries() {
+	        // Get the current date and time
+	        LocalDateTime currentTime = LocalDateTime.now();
+	        
+	        // Get yesterday's date
+	        LocalDate yesterday = currentTime.toLocalDate().minusDays(1);
+	        
+	        // Get the start and end of yesterday
+	        LocalDateTime startOfYesterday = LocalDateTime.of(yesterday, LocalTime.MIN);
+	        LocalDateTime endOfYesterday = LocalDateTime.of(yesterday, LocalTime.MAX);
+	        
+	        // Query the database to retrieve yesterday's entries
+	        List<Vehicle> yesterdayEntries = vehicleRepository.findByEntryTimeBetween(startOfYesterday, endOfYesterday);
+	        
+	        return yesterdayEntries;
+	    }
 }

@@ -1,6 +1,7 @@
 package com.app.pojo;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,6 +12,9 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+
+	@Column(name = "entry_time")
+	private LocalDateTime entryTime;
 
 	@Column(name = "vehicle_number", length = 200, nullable = false)
 	private String vehicleNumber;  // displays the number on the number plate of the vehicle
