@@ -2,6 +2,8 @@ package com.app.controller;
 
 import java.util.List;
 
+import com.app.dto.ErrorResponse;
+import com.app.dto.TicketDto;
 import com.app.pojo.Ticket;
 import com.app.service.TicketService;
 import com.app.service.VehicleService;
@@ -47,12 +49,28 @@ public class VehicleController {
 	// code for adding a new vehicle getting all the vehicles and removing the vehicle
 	  
 	  // generates a newticket with the appropriate slot number allocated to it
-	  @PostMapping("/addVehicle")
+	/*  @PostMapping("/addVehicle")
 	  public void addVehicle(@RequestBody Vehicle vehicle){
-		  Ticket ticket = ticketService.parkVehicle(vehicle);
+		  Ticket ticket=new Ticket();
+	//	  ticket.setVehicle(vehicle);
+		  ticketService.parkVehicle(vehicle);
 		  System.out.println(ticket);
-	  }
-  
+	  }*/
+	@PostMapping("/addVehicle")
+	public ResponseEntity<?> addNewVehicle(@RequestBody Vehicle vehicle) {
+		System.out.println("in add New Vehicle" + vehicle.toString());
+		try {
+			Ticket ticket= new Ticket();
+			ticket=ticketService.parkVehicle(vehicle);
+			TicketDto obj=new TicketDto(ticket.getId(),ticket.getDate(),ticket.getVehicleNumber(),ticket.getSlotNumber(),ticket.getType());
+			return new ResponseEntity<>(obj, HttpStatus.CREATED);
+		}
+		catch (RuntimeException e) {
+			System.out.println("error occured " + e);
+			return new ResponseEntity<>(new ErrorResponse("Adding vehicle failed", e.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	  @GetMapping("/getVehicles")
 	  public List<Vehicle> getAllVehicles(){
 		  List<Vehicle> vehicles = vehicleService.getAllVehicles();
@@ -60,7 +78,7 @@ public class VehicleController {
 		  return vehicles;
 	  }
   
-	  @DeleteMapping("/removeVehicle/{ticketId}")
+	 /* @DeleteMapping("/removeVehicle/{ticketId}")
 	  public ResponseEntity<String> removeVehicleByTicketId(@PathVariable Integer ticketId) {
 		  try {
 			  vehicleService.removeVehicleByTicketId(ticketId);
@@ -69,6 +87,18 @@ public class VehicleController {
 			  return ResponseEntity.badRequest().body("Failed to remove vehicle: " + e.getMessage());
 		  }
 	  }
+*/
+	@DeleteMapping("/removeVehicle/{id}")
+	public ResponseEntity<String> removeVehicleById(@PathVariable int id) {
+		System.out.println("in getVehicle " + id);
+		try {
+			vehicleService.removeVehicleById(id);
+			return new ResponseEntity<>("vehicle removed successfully",HttpStatus.OK);
+		} catch (RuntimeException e) {
+			System.out.println("error occured " + e);
+			return new ResponseEntity<>("error occured",HttpStatus.BAD_REQUEST);
+		}
+	}
 	 
 
 	/*
