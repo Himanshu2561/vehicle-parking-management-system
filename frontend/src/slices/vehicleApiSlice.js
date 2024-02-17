@@ -13,4 +13,4 @@ export const vehicleApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetVehiclesQueryQuery } = vehicleApiSlice;
+export const { useGetVehiclesQuery } = vehicleApiSlice;

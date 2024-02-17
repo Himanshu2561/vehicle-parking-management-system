@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import com.app.pojo.Vehicle;
 
 @RestController
-@RequestMapping("/vehicles")
+@CrossOrigin
+@RequestMapping("api/vehicles")
 public class VehicleController {
 
 	// getting the instances of the service layers
