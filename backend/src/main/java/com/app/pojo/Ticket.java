@@ -1,5 +1,8 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,8 +29,9 @@ public class Ticket {
     private VehicleType type;  // type of the vehicle
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "vehicle_id", unique = true)
+    @JsonBackReference
     private Vehicle vehicle;
 
     public Ticket(){}
