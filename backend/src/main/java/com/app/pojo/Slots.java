@@ -1,5 +1,7 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Slots {
 
     @OneToOne
     @JoinColumn(name = "vehicle_id", unique = true)
+    @JsonBackReference
     private Vehicle vehicle;
 
     public Slots(){}
@@ -45,13 +48,13 @@ public class Slots {
         this.vehicle = vehicle;
     }
 
-    public int getSlotsNumber() {
+    /*public int getSlotsNumber() {
         return slotNumber;
-    }
+    }*/
 
-    public void setSlotsNumber(int slotsNumber) {
+    /*public void setSlotsNumber(int slotsNumber) {
         this.slotNumber = slotsNumber;
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -89,7 +89,7 @@ public class TicketServiceImplementation implements TicketService{
         ticket.setDate(new Date());
         ticket.setVehicleNumber(vehicle.getVehicleNumber());
         ticket.setVehicle(vehicle);
-        ticket.setSlotNumber(slot.getSlotsNumber());
+        ticket.setSlotNumber(slot.getSlotNumber());
         ticket.setType(vehicle.getVehicleType());
 
         return ticket;

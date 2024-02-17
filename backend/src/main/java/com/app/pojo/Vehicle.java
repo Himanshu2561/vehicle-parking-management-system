@@ -1,10 +1,15 @@
 package com.app.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.Date;
-
+@Getter
 @Entity
 @Table(name = "vehicle")
+@JsonIgnoreProperties("ticket")
 public class Vehicle {
 
 	@Id
@@ -12,7 +17,7 @@ public class Vehicle {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "vehicle_number", length = 200, nullable = false)
+	@Column(name = "vehicle_number", length = 200, nullable = false,unique = true)
 	private String vehicleNumber;  // displays the number on the number plate of the vehicle
 
 	@Enumerated(EnumType.STRING)
@@ -22,10 +27,12 @@ public class Vehicle {
 	@Column(name = "creation_date", nullable = false)
 	private Date ticketDate;
 
-	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Ticket ticket;
 
-	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL)
+	@JsonManagedReference
     private Slots slot;
 
 	public Vehicle(){}  // creating the no args constructor
