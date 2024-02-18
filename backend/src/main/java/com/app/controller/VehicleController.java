@@ -3,9 +3,10 @@ package com.app.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.app.dto.DeleteMessageDto;
+import com.app.dto.AmountMessageDto;
 import com.app.dto.ErrorResponse;
 import com.app.dto.TicketDto;
+import com.app.dto.VehicleEntriesDto;
 import com.app.pojo.Ticket;
 import com.app.service.AmountService;
 import com.app.service.TicketService;
@@ -68,7 +69,7 @@ public class VehicleController {
             int amount = returnAmount(id);
             vehicleService.removeVehicleById(id);
 
-            DeleteMessageDto response = new DeleteMessageDto("vehicle removed successfully", amount);
+            AmountMessageDto response = new AmountMessageDto("vehicle removed successfully", amount);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (RuntimeException e) {
@@ -94,18 +95,30 @@ public class VehicleController {
         }
     }
 
+    @GetMapping("/totalEntries")
+    public ResponseEntity<?> getTotalVehicleEntries() {
+        try {
+            int vehicles = vehicleService.getAllVehicles().stream().toList().size();
+            int vehiclesFromAmountTable = amountService.getTotalNumberOfVehicles();
+            int totalNumberOfVehicles = vehicles + vehiclesFromAmountTable;
+            VehicleEntriesDto dtoResponse = new VehicleEntriesDto("Total Vehicle Entries", totalNumberOfVehicles);
+            return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            System.out.println("error occured " + e);
+            return new ResponseEntity<>("error occured", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     public int returnAmount(@PathVariable int vehicleId) {
         return amountService.AmountPerVehicle(vehicleId);
     }
 
 
-
-
-	@GetMapping("/lasSevenDaysAmount")
-	public int lastSevenDaysAmount()
-	{
-		int amount=amountService.lastSevenDaysAmount();
-		return amount;
-	}
+    @GetMapping("/lasSevenDaysAmount")
+    public ResponseEntity<?> lastSevenDaysAmount() {
+        int amount = amountService.lastSevenDaysAmount();
+        AmountMessageDto response = new AmountMessageDto("Last 7 Days Vehicle Amount", amount);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

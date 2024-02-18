@@ -1,20 +1,56 @@
 import React from "react";
 import Card from "../components/Card";
-import { useGetVehiclesQuery } from "../slices/vehicleApiSlice";
+import {
+  useGetVehiclesQuery,
+  useGetTotalNoOfVehiclesQuery,
+  useGetLastSevenDayAmountQuery,
+} from "../slices/vehicleApiSlice";
 import Loader from "../components/Loader";
 
 const HomePage = () => {
   const { data: vehicles, isLoading, error } = useGetVehiclesQuery();
 
-  console.log(vehicles);
+  const {
+    data: totalVehicle,
+    isLoading: totalLoading,
+    error: totalError,
+  } = useGetTotalNoOfVehiclesQuery();
+
+  const {
+    data: sevenDaysAmount,
+    isLoading: amountLoading,
+    error: amountError,
+  } = useGetLastSevenDayAmountQuery();
 
   return (
     <div className="">
       <div className="flex flex-wrap gap-y-10 gap-x-20">
-        <Card title={"Todays Vehicle Entries"} number={"12"} />
-        <Card title={"Yesterdays Vehicle Entries"} number={"12"} />
-        <Card title={"Last 7 Days Vehicle Entries"} number={"12"} />
-        <Card title={"Total Vehicle Entries"} number={"12"} />
+        {amountLoading ? (
+          <div className="flex justify-center items-center">
+            <Loader />
+          </div>
+        ) : amountError ? (
+          <div className="py-2 w-full rounded-md bg-opacity-50 bg-red-500 text-red-500">
+            {amountError?.data?.message || amountError.error}
+          </div>
+        ) : (
+          <Card title={"Last 7 Days Amount"} number={sevenDaysAmount.amount} />
+        )}
+        <Card title={"Last 30 Days Amount"} number={"12"} />
+        {totalLoading ? (
+          <div className="flex justify-center items-center">
+            <Loader />
+          </div>
+        ) : totalError ? (
+          <div className="py-2 w-full rounded-md bg-opacity-50 bg-red-500 text-red-500">
+            {totalError?.data?.message || totalError.error}
+          </div>
+        ) : (
+          <Card
+            title={"Total Vehicle Entries"}
+            number={totalVehicle.noOfVehicles}
+          />
+        )}
       </div>
       {isLoading ? (
         <div className="flex justify-center items-center">

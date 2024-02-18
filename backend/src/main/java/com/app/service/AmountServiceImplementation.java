@@ -92,4 +92,9 @@ public class AmountServiceImplementation implements AmountService{
         }
         return totalAmount;
     }
+
+    @Override
+    public int getTotalNumberOfVehicles() {
+        return amountRepository.findAll().size();
+    }
 }

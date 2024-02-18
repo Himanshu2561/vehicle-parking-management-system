@@ -1,13 +1,13 @@
 package com.app.dto;
 
-public class DeleteMessageDto {
+public class AmountMessageDto {
     String message;
     Integer amount;
 
-    public DeleteMessageDto() {
+    public AmountMessageDto() {
     }
 
-    public DeleteMessageDto(String message, Integer amount) {
+    public AmountMessageDto(String message, Integer amount) {
         this.message = message;
         this.amount = amount;
     }
@@ -30,7 +30,7 @@ public class DeleteMessageDto {
 
     @Override
     public String toString() {
-        return "DeleteMessageDto{" +
+        return "AmountMessageDto{" +
                 "message='" + message + '\'' +
                 ", amount=" + amount +
                 '}';
