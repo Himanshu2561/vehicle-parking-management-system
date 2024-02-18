@@ -1,11 +1,27 @@
 import React, { useState } from "react";
+import { useAddVehicleMutation } from "../slices/vehicleApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const VehicleRegForm = () => {
-  const [regNo, setRegNo] = useState("");
-  const [type, setType] = useState("");
+  const [vehicleNumber, setVehicleNumber] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
 
-  const signinHandler = (e) => {
+  const navigate = useNavigate();
+
+  const [addVehicle, { isLoading: loadingUpdate }] = useAddVehicleMutation();
+
+  const signinHandler = async (e) => {
     e.preventDefault();
+    try {
+      await addVehicle({
+        vehicleNumber,
+        vehicleType,
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -25,7 +41,7 @@ const VehicleRegForm = () => {
             </label>
             <input
               onChange={(e) => {
-                setRegNo(e.target.value);
+                setVehicleNumber(e.target.value);
               }}
               type="text"
               name="VRN"
@@ -44,15 +60,16 @@ const VehicleRegForm = () => {
             </label>
             <select
               onChange={(e) => {
-                setType(e.target.value);
+                setVehicleType(e.target.value);
               }}
               name="VT"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
               required={true}
               autoComplete="false"
             >
-              <option value="Two-Wheeler">Two Wheeler</option>
-              <option value="Four-Wheeler">Four Wheeler</option>
+              <option value="">Type</option>
+              <option value="TWO_WHEELER">Two Wheeler</option>
+              <option value="FOUR_WHEELER">Four Wheeler</option>
             </select>
           </div>
           <button

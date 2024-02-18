@@ -3,14 +3,13 @@ package com.app.service;
 import com.app.dao.SlotRepository;
 import com.app.dao.TicketRepository;
 import com.app.dao.VehicleRepository;
-import com.app.pojo.Slots;
-import com.app.pojo.Ticket;
 import com.app.pojo.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleServiceImplementation implements VehicleService{
@@ -48,4 +47,11 @@ public class VehicleServiceImplementation implements VehicleService{
         // delete the associated vehicle
         vehicleRepository.delete(vehicle);*/
     }
+
+    @Override
+    public Optional<Vehicle> searchById(int vehicleId) {
+        return vehicleRepository.findById(vehicleId);
+    }
+
+
 }
