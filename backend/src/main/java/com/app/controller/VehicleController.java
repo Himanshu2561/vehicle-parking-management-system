@@ -98,4 +98,14 @@ public class VehicleController {
         return amountService.AmountPerVehicle(vehicleId);
     }
 
+
+
+
+	@GetMapping("/lasSevenDaysAmount")
+	public int lastSevenDaysAmount()
+	{
+		int amount=amountService.lastSevenDaysAmount();
+		return amount;
+	}
+
 }
