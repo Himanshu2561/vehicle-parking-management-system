@@ -29,16 +29,31 @@ export const vehicleApiSlice = apiSlice.injectEndpoints({
 
     getLastSevenDayAmount: builder.query({
       query: () => ({
-        url: `${VEHICLES_URL}/lasSevenDaysAmount`,
+        url: `${VEHICLES_URL}/lastSevenDaysAmount`,
       }),
       keepUnusedDataFor: 5,
     }),
 
-    getVehicleDetails: builder.query({
+    getLastThirtyDayAmount: builder.query({
+      query: () => ({
+        url: `${VEHICLES_URL}/lastThirtyDaysAmount`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+
+    getVehicleDetail: builder.query({
       query: (vehicleId) => ({
         url: `${VEHICLES_URL}/search/${vehicleId}`,
       }),
       keepUnusedDataFor: 5,
+    }),
+
+    deleteVehicle: builder.mutation({
+      query: (vehicleId) => ({
+        url: `${VEHICLES_URL}/removeVehicle/${vehicleId}`,
+        method: "DELETE",
+      }),
+      providesTags: ["Vehicles"],
     }),
   }),
 });
@@ -48,5 +63,7 @@ export const {
   useAddVehicleMutation,
   useGetTotalNoOfVehiclesQuery,
   useGetLastSevenDayAmountQuery,
-  useGetVehicleDetailsQuery
+  useLazyGetVehicleDetailQuery,
+  useDeleteVehicleMutation,
+  useGetLastThirtyDayAmountQuery
 } = vehicleApiSlice;

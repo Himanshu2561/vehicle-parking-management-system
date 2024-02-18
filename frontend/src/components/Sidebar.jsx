@@ -21,7 +21,7 @@ const Sidebar = () => {
         <div>
           <FaSearch />
         </div>
-        <Link to="/search">Search Vehicle</Link>
+        <Link to="/search">Search/Delete Vehicle</Link>
       </div>
     </div>
   );

@@ -8,10 +8,6 @@ import com.app.pojo.VehicleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -84,6 +80,18 @@ public class AmountServiceImplementation implements AmountService{
     @Override
     public int lastSevenDaysAmount() {
         Date dateBeforeSevenDays=new Date(System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000));
+        int totalAmount=0;
+        List<Amount> amount= amountRepository.findByExitDateAfter(dateBeforeSevenDays);
+        for(Amount i :amount)
+        {
+            totalAmount=totalAmount+i.getAmountToPay();
+        }
+        return totalAmount;
+    }
+
+    @Override
+    public int lastThirtyDaysAmount() {
+        Date dateBeforeSevenDays=new Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000));
         int totalAmount=0;
         List<Amount> amount= amountRepository.findByExitDateAfter(dateBeforeSevenDays);
         for(Amount i :amount)

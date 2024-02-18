@@ -4,6 +4,7 @@ import {
   useGetVehiclesQuery,
   useGetTotalNoOfVehiclesQuery,
   useGetLastSevenDayAmountQuery,
+  useGetLastThirtyDayAmountQuery,
 } from "../slices/vehicleApiSlice";
 import Loader from "../components/Loader";
 
@@ -22,8 +23,14 @@ const HomePage = () => {
     error: amountError,
   } = useGetLastSevenDayAmountQuery();
 
+  const {
+    data: thirtyDaysAmount,
+    isLoading: amount30Loading,
+    error: amount30Error,
+  } = useGetLastThirtyDayAmountQuery();
+
   return (
-    <div className="">
+    <div>
       <div className="flex flex-wrap gap-y-10 gap-x-20">
         {amountLoading ? (
           <div className="flex justify-center items-center">
@@ -36,7 +43,22 @@ const HomePage = () => {
         ) : (
           <Card title={"Last 7 Days Amount"} number={sevenDaysAmount.amount} />
         )}
-        <Card title={"Last 30 Days Amount"} number={"12"} />
+
+        {amount30Loading ? (
+          <div className="flex justify-center items-center">
+            <Loader />
+          </div>
+        ) : amount30Error ? (
+          <div className="py-2 w-full rounded-md bg-opacity-50 bg-red-500 text-red-500">
+            {amount30Error?.data?.message || amount30Error.error}
+          </div>
+        ) : (
+          <Card
+            title={"Last 30 Days Amount"}
+            number={thirtyDaysAmount.amount}
+          />
+        )}
+
         {totalLoading ? (
           <div className="flex justify-center items-center">
             <Loader />
@@ -61,8 +83,8 @@ const HomePage = () => {
           {error?.data?.message || error.error}
         </div>
       ) : (
-        <div className="bg-white rounded-tl-lg rounded-tr-lg mt-20 h-screen">
-          <div className="relative overflow-x-auto rounded-lg flex flex-col justify-center items-center mb-10 mt-5">
+        <div className="bg-white rounded-tl-lg rounded-tr-lg mt-20 min-h-[9rem]">
+          <div className="relative overflow-x-auto rounded-tl-lg rounded-tr-lg flex flex-col justify-center items-center mb-10 mt-5">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="uppercase bg-gray-50 text-indigo-500">
                 <tr>
