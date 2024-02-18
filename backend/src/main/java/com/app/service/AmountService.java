@@ -5,5 +5,7 @@ public interface AmountService {
 
     int lastSevenDaysAmount();
 
+    int lastThirtyDaysAmount();
+
     int getTotalNumberOfVehicles();
 }

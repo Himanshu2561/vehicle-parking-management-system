@@ -121,4 +121,11 @@ public class VehicleController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/lasThirtyDaysAmount")
+    public ResponseEntity<?> lastThirtyDaysAmount() {
+        int amount = amountService.lastThirtyDaysAmount();
+        AmountMessageDto response = new AmountMessageDto("Last 30 Days Vehicle Amount", amount);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

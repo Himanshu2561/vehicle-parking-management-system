@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class AmountServiceImplementation implements AmountService{
 
@@ -92,6 +93,27 @@ public class AmountServiceImplementation implements AmountService{
         }
         return totalAmount;
     }
+
+    @Override
+    public int lastThirtyDaysAmount() {
+        Date dateBeforeThirtyDays=new Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000));
+        int totalAmount=0;
+        List<Amount> amount= amountRepository.findByExitDateAfter(dateBeforeThirtyDays);
+        for(Amount i :amount)
+        {
+            totalAmount=totalAmount+i.getAmountToPay();
+        }
+        System.out.println(amount);
+        return totalAmount;
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public int getTotalNumberOfVehicles() {

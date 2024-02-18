@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 @Getter
 @Entity
@@ -18,6 +19,7 @@ public class Vehicle {
 	private int id;
 
 	@Column(name = "vehicle_number", length = 200, nullable = false,unique = true)
+	@Pattern(regexp = "[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}", message = "Invalid vehicle number format")
 	private String vehicleNumber;  // displays the number on the number plate of the vehicle
 
 	@Enumerated(EnumType.STRING)
