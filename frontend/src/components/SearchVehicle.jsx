@@ -23,12 +23,12 @@ const SearchVehicle = () => {
 
   return (
     <div className="App">
-      <p className="text-2xl font-bold mb-5 text-pallet-2">Search Vehicle</p>
+      <p className="text-2xl font-bold mb-5 text-pallet-2">Search Vehicle By ID</p>
       <div className="search-container">
         <form onSubmit={handleSearch}>
           <input
             type="text"
-            placeholder="Enter Vehicle Number"
+            placeholder="Enter Vehicle ID"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDeleteVehicleMutation } from "../slices/vehicleApiSlice";
 
 const SearchTable = ({ searchResult }) => {
   const [deleteVehicle, { isLoading: loadingDelete, isSuccess }] =
     useDeleteVehicleMutation();
 
+  const [preiceData, setPriceData] = useState();
+
   const deleteVehicleHandler = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
-        await deleteVehicle(id);
-        window.location.reload();
+        const { data } = await deleteVehicle(id);
+        setPriceData(data);
       } catch (err) {
         console.log(err);
       }
     }
   };
 
-  return (
+  return !isSuccess ? (
     <table>
       <thead>
         <tr>
@@ -46,6 +48,17 @@ const SearchTable = ({ searchResult }) => {
         </tr>
       </tbody>
     </table>
+  ) : (
+    <div className="w-[25rem] capitalize font-semibold px-5 py-5 rounded-md gap-5 bg-pallet-5 flex flex-col justify-center items-center">
+      <div className="flex items-center gap-2">
+        <p>Payable Amount:</p>
+        <p>Rs. {preiceData.amount}/-</p>
+      </div>
+      <div className="flex items-center gap-2">
+        <p>Message:</p>
+        <p>{preiceData.message}</p>
+      </div>
+    </div>
   );
 };
 

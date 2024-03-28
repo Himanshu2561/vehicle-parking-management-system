@@ -36,8 +36,7 @@ const VehicleRegForm = () => {
               htmlFor="VRC"
               className="block mb-2 text-sm font-medium text-gray-900"
             >
-              <span className="text-red-500">*</span> Vehicle Registration
-              Number
+              <span className="text-red-500">*</span> Vehicle Number
             </label>
             <input
               onChange={(e) => {
@@ -46,7 +45,7 @@ const VehicleRegForm = () => {
               type="text"
               name="VRN"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-              placeholder="AB-00-CD-1234"
+              placeholder="XX11YY2222"
               required={true}
               autoComplete="true"
             />
@@ -76,7 +75,7 @@ const VehicleRegForm = () => {
             type="submit"
             className="w-full bg-ecom-3 text-white bg-pallet-3 transition bg-opacity-70 hover:bg-opacity-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
-            Generate Ticket
+            Add Vehicle
           </button>
         </form>
       </div>
